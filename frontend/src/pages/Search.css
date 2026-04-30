@@ -1,0 +1,104 @@
+.search-page {
+  padding-top: 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.search-header {
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.search-header h2 {
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.search-form {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.search-form .form-group {
+  flex: 1;
+}
+
+.search-btn {
+  padding: 12px 32px;
+  height: 48px;
+}
+
+.buses-container {
+  padding: 0 1rem;
+}
+
+.buses-container h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.bus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bus-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  transition: var(--transition);
+}
+
+.bus-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.bus-info h4 {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.route-info {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.time-info {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.bus-action {
+  text-align: right;
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .bus-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .bus-action {
+    text-align: left;
+    width: 100%;
+  }
+}
