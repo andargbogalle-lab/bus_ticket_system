@@ -5,6 +5,17 @@ const seatSchema = mongoose.Schema({
   isBooked: { type: Boolean, default: false },
 });
 
+
+
+
+
+
+
+
+
+
+
+
 const busSchema = mongoose.Schema(
   {
     busNumber: {
