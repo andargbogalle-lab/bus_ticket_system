@@ -42,6 +42,20 @@ export const createStaffUser = async (req, res) => {
       return res.status(400).json({ message: 'Invalid role' });
     }
 
+    // Validate fullName (only letters and spaces)
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    if (!nameRegex.test(fullName)) {
+      return res.status(400).json({ message: 'Full name must contain only letters and spaces' });
+    }
+
+    // Validate phone number if provided
+    if (phone && phone.trim() !== '') {
+      const phoneRegex = /^09\d{8}$/;
+      if (!phoneRegex.test(phone)) {
+        return res.status(400).json({ message: 'Phone number must be 10 digits starting with 09' });
+      }
+    }
+
     const userExists = await User.findOne({ username });
     if (userExists) {
       return res.status(400).json({ message: 'Username already exists' });
@@ -93,6 +107,22 @@ export const updateUser = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Validate fullName if being updated (only letters and spaces)
+    if (req.body.fullName) {
+      const nameRegex = /^[a-zA-Z\s]+$/;
+      if (!nameRegex.test(req.body.fullName)) {
+        return res.status(400).json({ message: 'Full name must contain only letters and spaces' });
+      }
+    }
+
+    // Validate phone number if being updated
+    if (req.body.phone !== undefined && req.body.phone.trim() !== '') {
+      const phoneRegex = /^09\d{8}$/;
+      if (!phoneRegex.test(req.body.phone)) {
+        return res.status(400).json({ message: 'Phone number must be 10 digits starting with 09' });
+      }
     }
 
     user.fullName = req.body.fullName || user.fullName;

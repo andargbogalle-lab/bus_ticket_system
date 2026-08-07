@@ -121,9 +121,38 @@ const AgentDashboard = () => {
                   </div>
 
                   <form onSubmit={handleBook} className="dash-form">
-                    <div className="form-group"><label>Passenger Full Name *</label><input type="text" value={form.passengerName} onChange={(e) => setForm({ ...form, passengerName: e.target.value })} required placeholder="Full name" /></div>
+                    <div className="form-group">
+                      <label>Passenger Full Name *</label>
+                      <input 
+                        type="text" 
+                        value={form.passengerName} 
+                        onChange={(e) => setForm({ ...form, passengerName: e.target.value })} 
+                        required 
+                        placeholder="Full name"
+                        pattern="[a-zA-Z\s]+"
+                        title="Name must contain only letters and spaces"
+                      />
+                      <small style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block', marginTop: '0.25rem' }}>
+                        Letters and spaces only
+                      </small>
+                    </div>
                     <div className="form-row">
-                      <div className="form-group"><label>Phone *</label><input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} required placeholder="0911..." /></div>
+                      <div className="form-group">
+                        <label>Phone *</label>
+                        <input 
+                          type="tel" 
+                          value={form.phone} 
+                          onChange={(e) => setForm({ ...form, phone: e.target.value })} 
+                          required 
+                          placeholder="0911234567"
+                          pattern="09[0-9]{8}"
+                          maxLength="10"
+                          title="Phone must be 10 digits starting with 09"
+                        />
+                        <small style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block', marginTop: '0.25rem' }}>
+                          Format: 09XXXXXXXX
+                        </small>
+                      </div>
                       <div className="form-group"><label>Address / Kebele *</label><input type="text" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} required placeholder="Address" /></div>
                     </div>
                     <div className="form-group"><label>Payment Method</label>

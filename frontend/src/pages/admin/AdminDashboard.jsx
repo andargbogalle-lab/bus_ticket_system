@@ -211,12 +211,40 @@ const AdminDashboard = () => {
             <h2>{editUser ? 'Edit Staff' : 'Add New Staff'}</h2>
             {error && <div className="dash-error" style={{ marginBottom: '1rem' }}>{error}</div>}
             <form onSubmit={handleSaveUser} className="dash-form">
-              <div className="form-group"><label>Full Name</label><input type="text" value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} required /></div>
+              <div className="form-group">
+                <label>Full Name</label>
+                <input 
+                  type="text" 
+                  value={formData.fullName} 
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} 
+                  required 
+                  pattern="[a-zA-Z\s]+"
+                  title="Name must contain only letters and spaces"
+                  placeholder="e.g. John Doe"
+                />
+                <small style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block', marginTop: '0.25rem' }}>
+                  Letters and spaces only
+                </small>
+              </div>
               <div className="form-group"><label>Username</label><input type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} required /></div>
               <div className="form-group"><label>{editUser ? 'New Password (blank = keep)' : 'Password'}</label><input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} {...(!editUser && { required: true })} /></div>
               <div className="form-row">
                 <div className="form-group"><label>Role</label><select value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })}><option value="agent">Agent</option><option value="admin">Admin</option></select></div>
-                <div className="form-group"><label>Phone</label><input type="text" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} /></div>
+                <div className="form-group">
+                  <label>Phone (Optional)</label>
+                  <input 
+                    type="text" 
+                    value={formData.phone} 
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    placeholder="0911234567"
+                    pattern="09[0-9]{8}"
+                    maxLength="10"
+                    title="Phone must be 10 digits starting with 09"
+                  />
+                  <small style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block', marginTop: '0.25rem' }}>
+                    Format: 09XXXXXXXX (optional)
+                  </small>
+                </div>
               </div>
               <div className="modal-actions"><button type="button" className="btn btn-outline" onClick={() => setShowModal(false)}>Cancel</button><button type="submit" className="btn btn-primary">{editUser ? 'Update' : 'Create'}</button></div>
             </form>

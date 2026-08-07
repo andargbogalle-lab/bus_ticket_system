@@ -176,8 +176,13 @@ const BookTicket = () => {
                   placeholder="Enter your full name"
                   value={passengerName}
                   onChange={(e) => setPassengerName(e.target.value)}
+                  pattern="[a-zA-Z\s]+"
+                  title="Name must contain only letters and spaces"
                   required
                 />
+                <small style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block' }}>
+                  Letters and spaces only
+                </small>
               </div>
 
               <div className="form-group">
@@ -188,8 +193,14 @@ const BookTicket = () => {
                   placeholder="e.g. 0911234567"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
+                  pattern="09[0-9]{8}"
+                  maxLength="10"
+                  title="Phone must be 10 digits starting with 09"
                   required
                 />
+                <small style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block' }}>
+                  Format: 09XXXXXXXX (10 digits)
+                </small>
               </div>
 
               <div className="form-group">

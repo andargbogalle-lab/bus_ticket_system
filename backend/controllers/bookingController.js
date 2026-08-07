@@ -21,6 +21,18 @@ export const createBooking = async (req, res) => {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
+    // Validate passenger name (only letters and spaces)
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    if (!nameRegex.test(passengerName)) {
+      return res.status(400).json({ message: 'Passenger name must contain only letters and spaces' });
+    }
+
+    // Validate phone number format (10 digits starting with 09)
+    const phoneRegex = /^09\d{8}$/;
+    if (!phoneRegex.test(phone)) {
+      return res.status(400).json({ message: 'Phone number must be 10 digits starting with 09 (e.g., 0911234567)' });
+    }
+
     if (!['card', 'mobile_banking'].includes(paymentMethod)) {
       return res.status(400).json({ message: 'Payment method must be card or mobile_banking' });
     }
@@ -104,6 +116,18 @@ export const agentCreateBooking = async (req, res) => {
 
     if (!busId || !seatNumbers || !passengerName || !phone || !address || !paymentMethod) {
       return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    // Validate passenger name (only letters and spaces)
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    if (!nameRegex.test(passengerName)) {
+      return res.status(400).json({ message: 'Passenger name must contain only letters and spaces' });
+    }
+
+    // Validate phone number format (10 digits starting with 09)
+    const phoneRegex = /^09\d{8}$/;
+    if (!phoneRegex.test(phone)) {
+      return res.status(400).json({ message: 'Phone number must be 10 digits starting with 09 (e.g., 0911234567)' });
     }
 
     const bus = await Bus.findById(busId);
